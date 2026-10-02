@@ -9,45 +9,50 @@
      --------------------------------------------------------------------- */
 
   /* Surfaces (light) — cool, blue-cast neutrals rather than warm grey */
-  --paper:            #f6f8fb;  /* page base */
+  --paper:            #f4f7fd;  /* page base */
   --paper-raised:     #ffffff;  /* lifted blocks */
-  --paper-sunken:     #e7edf6;  /* recessed bands */
-  --paper-tint:       #dfe8f4;  /* faint wash for diagrams */
+  --paper-sunken:     #e4ecfb;  /* recessed bands */
+  --paper-tint:       #dbe6f9;  /* faint wash for diagrams */
 
   /* Ink — near-black with a blue cast, so text belongs to the palette */
-  --ink:              #0f1b2a;  /* headings */
-  --ink-body:         #2b3a4d;  /* long-form copy */
-  --ink-muted:        #4e6075;  /* secondary copy — AA on paper and sunken */
-  --ink-faint:        #5b6e85;  /* smallest labels — still AA */
-  --ink-quiet:        #7187a1;  /* display sizes only (>=24px), where AA is 3:1 */
+  --ink:              #0c1829;  /* headings */
+  --ink-body:         #273449;  /* long-form copy */
+  --ink-muted:        #4a5c74;  /* secondary copy — AA on paper and sunken */
+  --ink-faint:        #5a6d86;  /* smallest labels — still AA */
+  --ink-quiet:        #7a8da6;  /* display sizes only (>=24px), where AA is 3:1 */
 
   /* Primary — navy. The brand's anchor and the inverted surface. */
-  --deep:             #0b2545;
-  --deep-raised:      #12325a;
-  --deep-line:        #1b3c66;
-  --on-deep:          #eaf1fa;
-  --on-deep-body:     #d3e0f0;
-  --on-deep-muted:    #a8bdd8;
-  --on-deep-faint:    #8099bb;
+  --deep:             #0b1f3f;
+  --deep-raised:      #122a52;
+  --deep-line:        #1c3a68;
+  --on-deep:          #eaf2ff;
+  --on-deep-body:     #d2e2fb;
+  --on-deep-muted:    #a5bee2;
+  --on-deep-faint:    #8aa4cc;
+
+  /* The brand blue. Fills and primary actions; text uses --accent-ink, which
+     has more headroom against paper. */
+  --brand:            #2563eb;
+  --brand-hover:      #1d4ed8;
 
   /* Accent — blue. Carries emphasis, marks and interactive state. */
-  --accent:           #4d9fe8;  /* on navy */
-  --accent-ink:       #1c5cab;  /* as text on light — AA */
-  --accent-strong:    #184f95;
-  --accent-soft:      #dce9f7;
+  --accent:           #60a5fa;  /* on navy */
+  --accent-ink:       #1d4ed8;  /* as text on light — AA */
+  --accent-strong:    #1e40af;
+  --accent-soft:      #dbe9fe;
 
   /* Second accent — amber. Deliberately rare: it marks "now" and the single
      most important figure in a view. Used anywhere else it stops working. */
   --amber:            #f0a63c;  /* on navy */
   --amber-ink:        #8a4a0a;  /* as text on light — AA */
-  --amber-soft:       #fbeedd;
+  --amber-soft:       #fdf0dd;
 
   /* Trajectory chart — one hue, monotone lightness, validated as an ordinal
      ramp against the navy surface (see components/sections/Trajectory). */
-  --layer-1:          #2a78d6;  /* earliest era, foot of the stack */
-  --layer-2:          #5598e7;
-  --layer-3:          #9ec5f4;
-  --layer-4:          #cde2fb;  /* most recent era, top of the stack */
+  --layer-1:          #2563eb;  /* earliest era, foot of the stack */
+  --layer-2:          #5f96f2;
+  --layer-3:          #96c0f8;
+  --layer-4:          #cfe3fe;  /* most recent era, top of the stack */
 
   /* Feedback */
   --danger:           #a3302a;
@@ -56,8 +61,8 @@
   --success-soft:     #e0efe8;
 
   /* Lines */
-  --line:             #d4dfee;
-  --line-strong:      #b3c5de;
+  --line:             #cfdcf2;
+  --line-strong:      #adc1e0;
 
   /* Semantic aliases resolved per-surface by [data-surface] below */
   --surface:          var(--paper);
@@ -70,12 +75,12 @@
   --mark:             var(--accent-ink);
 
   /* Surface-aware component tokens — redefined per [data-surface] below */
-  --btn-bg:           var(--deep);
-  --btn-fg:           var(--on-deep);
-  --btn-bg-hover:     #061a33;
-  --wash:             rgba(15, 27, 42, 0.045);
-  --wash-strong:      rgba(15, 27, 42, 0.075);
-  --grid-line:        rgba(28, 92, 171, 0.08);
+  --btn-bg:           var(--brand);
+  --btn-fg:           #ffffff;
+  --btn-bg-hover:     var(--brand-hover);
+  --wash:             rgba(12, 24, 41, 0.045);
+  --wash-strong:      rgba(12, 24, 41, 0.075);
+  --grid-line:        rgba(37, 99, 235, 0.09);
 
   /* ---------------------------------------------------------------------
      2. TYPOGRAPHY — fluid scale, 360px → 1440px
@@ -83,6 +88,7 @@
   --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, -apple-system,
                'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: var(--font-instrument-serif), ui-serif, Georgia, 'Times New Roman', serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   --fs-eyebrow:    0.75rem;
   --fs-micro:      0.8125rem;
@@ -110,6 +116,9 @@
   --ls-normal:   0;
 
   --fw-regular: 400;
+  /* Display sizes read better at regular weight — both reference sites set
+     their largest headings at 400, not at a medium. */
+  --fw-display: 400;
   --fw-medium:  500;
   --fw-semi:    600;
   --fw-bold:    680;
@@ -159,11 +168,11 @@
   /* ---------------------------------------------------------------------
      6. ELEVATION — two levels only
      --------------------------------------------------------------------- */
-  --shadow-sm: 0 1px 2px rgba(11, 37, 69, 0.05),
-               0 2px 8px rgba(11, 37, 69, 0.05);
-  --shadow-md: 0 2px 4px rgba(11, 37, 69, 0.05),
-               0 12px 32px -8px rgba(11, 37, 69, 0.13);
-  --shadow-blue: 0 10px 34px -12px rgba(28, 92, 171, 0.42);
+  --shadow-sm: 0 1px 2px rgba(11, 31, 63, 0.06),
+               0 2px 8px rgba(11, 31, 63, 0.06);
+  --shadow-md: 0 2px 4px rgba(11, 31, 63, 0.06),
+               0 12px 32px -8px rgba(11, 31, 63, 0.14);
+  --shadow-blue: 0 10px 34px -12px rgba(37, 99, 235, 0.45);
 
   /* ---------------------------------------------------------------------
      7. MOTION — natural easing, intentional durations
@@ -204,12 +213,12 @@
   --rule: var(--line);
   --rule-strong: var(--line-strong);
   --mark: var(--accent-ink);
-  --btn-bg: var(--deep);
-  --btn-fg: var(--on-deep);
-  --btn-bg-hover: #061a33;
-  --wash: rgba(15, 27, 42, 0.045);
-  --wash-strong: rgba(15, 27, 42, 0.075);
-  --grid-line: rgba(28, 92, 171, 0.08);
+  --btn-bg: var(--brand);
+  --btn-fg: #ffffff;
+  --btn-bg-hover: var(--brand-hover);
+  --wash: rgba(12, 24, 41, 0.045);
+  --wash-strong: rgba(12, 24, 41, 0.075);
+  --grid-line: rgba(37, 99, 235, 0.09);
 }
 
 [data-surface='sunken'] {
@@ -217,16 +226,16 @@
   --fg: var(--ink);
   --fg-body: var(--ink-body);
   --fg-muted: var(--ink-muted);
-  --fg-faint: #55687f;
-  --rule: #c9d7ea;
+  --fg-faint: #54677f;
+  --rule: #c6d6f0;
   --rule-strong: var(--line-strong);
   --mark: var(--accent-ink);
-  --btn-bg: var(--deep);
-  --btn-fg: var(--on-deep);
-  --btn-bg-hover: #061a33;
-  --wash: rgba(15, 27, 42, 0.05);
-  --wash-strong: rgba(15, 27, 42, 0.08);
-  --grid-line: rgba(28, 92, 171, 0.09);
+  --btn-bg: var(--brand);
+  --btn-fg: #ffffff;
+  --btn-bg-hover: var(--brand-hover);
+  --wash: rgba(12, 24, 41, 0.05);
+  --wash-strong: rgba(12, 24, 41, 0.08);
+  --grid-line: rgba(37, 99, 235, 0.1);
 }
 
 [data-surface='deep'] {
@@ -236,14 +245,14 @@
   --fg-muted: var(--on-deep-muted);
   --fg-faint: var(--on-deep-faint);
   --rule: var(--deep-line);
-  --rule-strong: #2a5688;
+  --rule-strong: #2b4e85;
   --mark: var(--accent);
   --btn-bg: var(--paper);
   --btn-fg: var(--deep);
   --btn-bg-hover: #ffffff;
-  --wash: rgba(234, 241, 250, 0.07);
-  --wash-strong: rgba(234, 241, 250, 0.11);
-  --grid-line: rgba(168, 189, 216, 0.14);
+  --wash: rgba(234, 242, 255, 0.07);
+  --wash-strong: rgba(234, 242, 255, 0.11);
+  --grid-line: rgba(165, 190, 226, 0.15);
 }
 
 /* -----------------------------------------------------------------------

@@ -135,6 +135,7 @@
 
 /* The reprocess loop — the real cost of a manual flow */
 .loop {
+  font-family: var(--font-mono);
   display: inline-flex;
   align-items: center;
   gap: var(--s-3);
@@ -156,6 +157,7 @@
 }
 
 .outcome {
+  font-family: var(--font-mono);
   display: inline-flex;
   align-items: center;
   gap: var(--s-3);

@@ -203,6 +203,7 @@
 }
 
 .panelIndex {
+  font-family: var(--font-mono);
   color: var(--ink-faint);
   font-size: 0.6875rem;
   font-variant-numeric: tabular-nums;

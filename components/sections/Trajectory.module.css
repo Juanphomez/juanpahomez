@@ -19,7 +19,7 @@
   margin: 0;
   max-width: 20ch;
   font-size: var(--fs-h2);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-display);
   letter-spacing: var(--ls-tighter);
   line-height: var(--lh-snug);
 }
@@ -67,6 +67,7 @@
 }
 
 .yAxis {
+  font-family: var(--font-mono);
   position: relative;
   width: 1rem;
   color: var(--fg-faint);
@@ -112,6 +113,7 @@
 
 .grid line {
   stroke: var(--rule);
+  stroke-dasharray: 3 4;
 }
 
 .baseline {
@@ -192,6 +194,7 @@
 }
 
 .xTick {
+  font-family: var(--font-mono);
   position: absolute;
   top: 0;
   transform: translateX(-50%);
@@ -265,6 +268,7 @@
 }
 
 .period {
+  font-family: var(--font-mono);
   color: var(--fg-muted);
   font-size: var(--fs-micro);
   font-variant-numeric: tabular-nums;
@@ -336,7 +340,7 @@
   max-width: 24ch;
   color: var(--fg);
   font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.25rem);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-display);
   letter-spacing: var(--ls-tighter);
   line-height: 1.15;
 }

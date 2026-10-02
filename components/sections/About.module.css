@@ -43,7 +43,7 @@
   margin: 0;
   max-width: 26ch;
   font-size: var(--fs-h2);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-display);
   letter-spacing: var(--ls-tighter);
   line-height: var(--lh-snug);
 }

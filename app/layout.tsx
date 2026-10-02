@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter_Tight, Instrument_Serif } from 'next/font/google';
+import { Inter_Tight, Instrument_Serif, IBM_Plex_Mono } from 'next/font/google';
 import { site } from '@/content/site';
 import { homeSchemaGraph } from '@/lib/schema';
 import { Header } from '@/components/layout/Header';
@@ -13,6 +13,14 @@ const interTight = Inter_Tight({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter-tight',
+});
+
+/* Carries eyebrows, indices and axis labels — the technical voice. */
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-plex-mono',
 });
 
 const instrumentSerif = Instrument_Serif({
@@ -87,15 +95,15 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f6f8fb' },
-    { media: '(prefers-color-scheme: dark)', color: '#0b2545' },
+    { media: '(prefers-color-scheme: light)', color: '#f4f7fd' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b1f3f' },
   ],
   colorScheme: 'light',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-CO" className={`${interTight.variable} ${instrumentSerif.variable}`}>
+    <html lang="es-CO" className={`${interTight.variable} ${instrumentSerif.variable} ${plexMono.variable}`}>
       <head>
         {/* Opts into the reveal styles before first paint, and only where the
             IntersectionObserver that reverses them exists. Without JavaScript

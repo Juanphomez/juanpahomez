@@ -14,7 +14,7 @@
   margin: 0;
   max-width: 30ch;
   font-size: var(--fs-statement);
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-display);
   letter-spacing: var(--ls-tighter);
   line-height: var(--lh-tight);
   text-wrap: initial;

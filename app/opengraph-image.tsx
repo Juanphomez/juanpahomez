@@ -20,8 +20,8 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '72px 80px',
-          background: 'linear-gradient(135deg, #0b2545 0%, #071a33 100%)',
-          color: '#eaf1fa',
+          background: 'linear-gradient(135deg, #0b1f3f 0%, #061631 100%)',
+          color: '#eaf2ff',
           fontFamily: 'sans-serif',
         }}
       >
@@ -32,7 +32,7 @@ export default function OpenGraphImage() {
               fontSize: 20,
               letterSpacing: 4,
               textTransform: 'uppercase',
-              color: '#a8bdd8',
+              color: '#a5bee2',
             }}
           >
             Contabilidad · Datos · Tecnología · Producto
@@ -59,13 +59,13 @@ export default function OpenGraphImage() {
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingTop: 32,
-            borderTop: '1px solid #1b3c66',
+            borderTop: '1px solid #1c3a68',
           }}
         >
           <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: -0.8 }}>
             {site.name}
           </div>
-          <div style={{ fontSize: 24, color: '#a8bdd8' }}>{site.domain}</div>
+          <div style={{ fontSize: 24, color: '#a5bee2' }}>{site.domain}</div>
         </div>
       </div>
     ),
