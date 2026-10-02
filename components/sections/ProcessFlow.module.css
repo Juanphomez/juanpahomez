@@ -1,0 +1,257 @@
+/* =========================================================================
+   The problem, drawn. One sequence that reorganises itself as you scroll:
+   fragmented manual work on the left of the scroll, a process that holds
+   together on the right. Never a BPMN diagram.
+   ========================================================================= */
+
+.track {
+  position: relative;
+}
+
+.stage {
+  display: grid;
+  gap: var(--s-8);
+}
+
+.stateHeader {
+  display: grid;
+  gap: var(--s-2);
+  min-height: 4.5rem;
+}
+
+.stateLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin: 0;
+  color: var(--fg);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight);
+}
+
+.stateNote {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+.dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-pill);
+  background-color: var(--fg-faint);
+}
+
+.dotAfter {
+  background-color: var(--accent-ink);
+}
+
+/* --- Sequences ---------------------------------------------------------- */
+.sequence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4375rem 0.8125rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-sm);
+  background-color: var(--paper-raised);
+  color: var(--fg-body);
+  font-size: var(--fs-micro);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* Manual steps look provisional: dashed edge, no fill, slightly off-baseline */
+.before .chip {
+  border-style: dashed;
+  background-color: transparent;
+  color: var(--fg-muted);
+}
+
+.after .chip {
+  border-color: transparent;
+  background-color: var(--paper-raised);
+  box-shadow: var(--shadow-sm);
+  color: var(--fg);
+  font-weight: var(--fw-medium);
+}
+
+.connector {
+  flex: none;
+  width: var(--s-6);
+  height: 1px;
+  background-color: var(--rule-strong);
+}
+
+.before .connector {
+  background-image: linear-gradient(to right, var(--rule-strong) 50%, transparent 0);
+  background-size: 5px 1px;
+  background-repeat: repeat-x;
+  background-color: transparent;
+}
+
+.after .connector {
+  background-color: var(--accent);
+}
+
+/* The reprocess loop — the real cost of a manual flow */
+.loop {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+  color: var(--fg-faint);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+.loopLine {
+  display: block;
+  width: clamp(3rem, 14vw, 9rem);
+  height: 1px;
+  background-image: linear-gradient(to right, var(--line-strong) 50%, transparent 0);
+  background-size: 5px 1px;
+  background-repeat: repeat-x;
+}
+
+.outcome {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+  color: var(--accent-ink);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+.outcomeLine {
+  display: block;
+  width: clamp(3rem, 14vw, 9rem);
+  height: 1px;
+  background-color: var(--accent);
+}
+
+/* --- Static layout: both states shown, side by side --------------------- */
+.static {
+  display: grid;
+  gap: var(--s-10);
+  padding-top: var(--s-4);
+}
+
+.staticPanel {
+  display: grid;
+  gap: var(--s-5);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--rule);
+}
+
+@media (min-width: 60rem) {
+  .static {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-12);
+  }
+}
+
+/* --- Animated layout: a sticky stage the sequence reorganises inside ----- */
+.animatedTrack {
+  /* Scroll distance that drives the transition. Long enough for the change to
+     read as deliberate, short enough that it never feels like the page stopped. */
+  height: 165vh;
+}
+
+.sticky {
+  position: sticky;
+  /* Centred in the viewport while pinned, never tucked under the header */
+  top: max(calc(var(--header-h) + 2rem), calc(50vh - 11rem));
+  display: grid;
+  gap: var(--s-10);
+  /* Reserve the taller of the two states so nothing jumps during the morph */
+  min-height: 20rem;
+  align-content: start;
+}
+
+.layers {
+  position: relative;
+  /* Reserves the taller of the two states so the stage never jumps */
+  min-height: 14rem;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: start;
+  gap: var(--s-4);
+  transition: opacity var(--t-base) linear;
+}
+
+/* Progress (--p) drives both layers. The crossfade windows overlap slightly
+   so there is never a frame with nothing on screen. */
+.layerBefore {
+  opacity: clamp(0, calc((0.52 - var(--p)) / 0.22), 1);
+}
+
+.layerAfter {
+  opacity: clamp(0, calc((var(--p) - 0.34) / 0.22), 1);
+}
+
+.layerBefore[data-hidden='true'],
+.layerAfter[data-hidden='true'] {
+  pointer-events: none;
+}
+
+/* Manual steps sit off the baseline and settle onto it as the flow resolves */
+.before .step {
+  transform: translateY(calc(var(--scatter, 0px) * (1 - var(--p, 1))));
+}
+
+.after .connector {
+  transform-origin: left center;
+  transform: scaleX(clamp(0, calc((var(--p, 1) - 0.5) / 0.35), 1));
+}
+
+/* Progress rule under the stage: the only chrome the animation needs */
+.progress {
+  position: relative;
+  height: 1px;
+  background-color: var(--rule);
+}
+
+.progressFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--p) * 100%);
+  background-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animatedTrack {
+    height: auto;
+  }
+
+  .sticky {
+    position: static;
+  }
+}

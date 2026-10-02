@@ -1,0 +1,77 @@
+/* =========================================================================
+   MOTION — every rule here answers: does this help understand the content?
+   Styles are gated on [data-js='on'] so that without JavaScript all content
+   is visible by default. Nothing is ever hidden behind an animation.
+   ========================================================================= */
+
+/* --- Fade + translate, the workhorse ----------------------------------- */
+[data-js='on'] [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-shift), 0);
+  transition:
+    opacity var(--reveal-duration, var(--t-reveal)) var(--ease-out),
+    transform var(--reveal-duration, var(--t-reveal)) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-js='on'] [data-reveal='left'] {
+  transform: translate3d(calc(var(--reveal-shift) * -1), 0, 0);
+}
+
+[data-js='on'] [data-reveal='scale'] {
+  transform: scale(0.985);
+}
+
+[data-js='on'] [data-reveal][data-revealed='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Masked line reveal, for display headings -------------------------- */
+.lineMask {
+  display: block;
+  overflow: hidden;
+  /* Room for descenders so nothing is clipped while masked */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+[data-js='on'] .lineMask > span {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform var(--reveal-duration, var(--t-reveal)) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-js='on'] [data-revealed='true'] .lineMask > span,
+[data-js='on'] .lineMask[data-revealed='true'] > span {
+  transform: none;
+}
+
+/* --- Reduced motion ----------------------------------------------------
+   The entrance is dropped entirely rather than merely shortened: content is
+   never hidden waiting on an observer, so it is there for find-in-page, for
+   a failed observer, and for anyone who asked not to be moved. */
+@media (prefers-reduced-motion: reduce) {
+  [data-js='on'] [data-reveal],
+  [data-js='on'] [data-reveal='left'],
+  [data-js='on'] [data-reveal='scale'] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  [data-js='on'] .lineMask > span {
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

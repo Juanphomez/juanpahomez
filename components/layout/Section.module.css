@@ -1,0 +1,45 @@
+.section {
+  position: relative;
+  background-color: var(--surface);
+  color: var(--fg-body);
+  padding-block: var(--section-y);
+}
+
+.tight {
+  padding-block: var(--section-y-tight);
+}
+
+.loose {
+  padding-block: var(--section-y-loose);
+}
+
+.flush {
+  padding-block: 0;
+}
+
+.ruledTop {
+  border-top: 1px solid var(--rule);
+}
+
+.ruledBottom {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* A very faint grid, used only where it clarifies structure */
+.grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px);
+  background-size: 25% 100%;
+  /* Fades out before the section edges so it never reads as a table */
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+
+.content {
+  position: relative;
+  z-index: var(--z-base);
+}

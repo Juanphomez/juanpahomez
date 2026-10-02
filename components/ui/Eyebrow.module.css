@@ -1,0 +1,37 @@
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* A short rule anchors the label to the grid — a technical detail, not a bullet */
+.ruled::before {
+  content: '';
+  flex: none;
+  width: var(--s-6);
+  height: 1px;
+  background-color: var(--rule-strong);
+}
+
+@media (min-width: 30rem) {
+  .ruled::before {
+    width: var(--s-8);
+  }
+}
+
+.marked {
+  color: var(--mark);
+}
+
+/* When the label has to wrap, split it evenly instead of orphaning a word */
+.eyebrow > span {
+  min-width: 0;
+  text-wrap: balance;
+}

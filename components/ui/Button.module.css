@@ -1,0 +1,131 @@
+.base {
+  --btn-pad-y: 0.875rem;
+  --btn-pad-x: 1.5rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  padding: var(--btn-pad-y) var(--btn-pad-x);
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--t-base) var(--ease-out),
+    border-color var(--t-base) var(--ease-out),
+    color var(--t-base) var(--ease-out),
+    transform var(--t-fast) var(--ease-out);
+}
+
+.base:disabled,
+.base[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* The arrow is part of the label's meaning, so it moves with the hover. */
+.icon {
+  flex: none;
+  transition: transform var(--t-base) var(--ease-out);
+}
+
+.base:hover .icon {
+  transform: translateX(3px);
+}
+
+.base[data-direction='down']:hover .icon {
+  transform: translateY(3px);
+}
+
+/* --- Primary ----------------------------------------------------------- */
+.primary {
+  background-color: var(--btn-bg);
+  color: var(--btn-fg);
+}
+
+.primary:hover {
+  background-color: var(--btn-bg-hover);
+  transform: translateY(-1px);
+}
+
+.primary:active {
+  transform: translateY(0);
+}
+
+/* --- Secondary: outlined, same weight of intent, less visual pull ------ */
+.secondary {
+  background-color: transparent;
+  border-color: var(--rule-strong);
+  color: var(--fg);
+}
+
+.secondary:hover {
+  background-color: var(--wash);
+  border-color: var(--fg);
+}
+
+/* --- Ghost: inline, for tertiary actions ------------------------------- */
+.ghost {
+  padding-inline: var(--s-2);
+  background-color: transparent;
+  color: var(--fg);
+}
+
+.ghost:hover {
+  color: var(--mark);
+}
+
+/* --- Link: reads as text, behaves as a CTA. The rule is drawn with a
+       background gradient so it can animate without shifting the baseline. --- */
+.link {
+  padding: 0 0 3px;
+  border-radius: var(--r-xs);
+  color: var(--fg);
+  font-size: var(--fs-small);
+  gap: var(--s-2);
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  transition:
+    color var(--t-base) var(--ease-out),
+    background-size var(--t-base) var(--ease-out);
+}
+
+.link:hover {
+  color: var(--mark);
+  background-size: 0 1px;
+  background-position: 100% 100%;
+}
+
+/* --- Sizes ------------------------------------------------------------- */
+.lg {
+  --btn-pad-y: 1.0625rem;
+  --btn-pad-x: 1.875rem;
+  font-size: var(--fs-body);
+}
+
+.sm {
+  --btn-pad-y: 0.625rem;
+  --btn-pad-x: 1.125rem;
+  font-size: var(--fs-micro);
+}
+
+/* Full width on narrow screens so touch targets stay comfortable */
+.block {
+  width: 100%;
+}
+
+@media (max-width: 29.9375rem) {
+  .fluid {
+    width: 100%;
+  }
+}

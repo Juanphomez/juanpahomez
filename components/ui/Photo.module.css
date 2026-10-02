@@ -1,0 +1,57 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--paper-sunken);
+  isolation: isolate;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Placeholder: deliberate, not broken -------------------------------- */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-4);
+  padding: var(--s-6);
+  background-color: var(--paper-sunken);
+  background-image:
+    linear-gradient(to right, rgba(20, 24, 27, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 24, 27, 0.045) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+  text-align: center;
+}
+
+.placeholderMark {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0.5;
+}
+
+.placeholderNote {
+  max-width: 24ch;
+  color: var(--ink-muted);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.placeholderPath {
+  color: var(--ink-faint);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  word-break: break-all;
+}

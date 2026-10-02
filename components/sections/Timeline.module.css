@@ -1,0 +1,171 @@
+/* =========================================================================
+   A narrative of accumulated capability, not a CV. Horizontal on desktop so
+   the progression reads left to right; vertical on small screens.
+   ========================================================================= */
+
+.header {
+  display: grid;
+  gap: var(--s-4);
+  margin-bottom: var(--s-12);
+  max-width: 40rem;
+}
+
+.title {
+  margin: 0;
+  max-width: 24ch;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.25;
+}
+
+.track {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.era {
+  position: relative;
+  padding: 0 0 var(--s-8) var(--s-8);
+  /* The connecting line runs through the markers */
+  border-left: 1px solid var(--rule);
+}
+
+.era:last-of-type {
+  padding-bottom: var(--s-8);
+}
+
+.marker {
+  position: absolute;
+  top: 0.5rem;
+  left: -4.5px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background-color: var(--surface);
+  box-shadow: inset 0 0 0 1.5px var(--rule-strong);
+}
+
+.era[data-current='true'] .marker {
+  background-color: var(--accent);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.eraInner {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.period {
+  color: var(--mark);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.06em;
+}
+
+.eraTitle {
+  margin: 0;
+  color: var(--fg);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.25;
+}
+
+.note {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+.capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-3);
+  margin: var(--s-1) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--fg-body);
+  font-size: var(--fs-micro);
+}
+
+.capabilities li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.capabilities li:not(:last-child)::after {
+  content: '';
+  width: 2px;
+  height: 2px;
+  border-radius: var(--r-pill);
+  background-color: var(--rule-strong);
+}
+
+/* --- Today: where the four eras converge -------------------------------- */
+.today {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-8) 0 0 var(--s-8);
+}
+
+.todayBody {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.todayTitle {
+  margin: 0;
+  max-width: 24ch;
+  color: var(--fg);
+  font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: 1.2;
+}
+
+@media (min-width: 64rem) {
+  .track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--s-8);
+  }
+
+  .era {
+    padding: var(--s-8) var(--s-4) 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .era:last-of-type {
+    padding-bottom: 0;
+  }
+
+  .marker {
+    top: -4.5px;
+    left: 0;
+  }
+
+  .note {
+    max-width: 26ch;
+  }
+
+  .today {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: baseline;
+    gap: var(--s-8);
+    margin-top: var(--s-12);
+    padding: var(--s-8) 0 0;
+    border-top: 1px solid var(--rule-strong);
+    border-left: 0;
+  }
+}

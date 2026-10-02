@@ -1,0 +1,246 @@
+/* =========================================================================
+   DESIGN SYSTEM — Juan Pablo Hómez
+   Single source of truth. No component may invent a raw value.
+   ========================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------
+     1. COLOR — base paper, ink, deep petrol primary, one controlled accent
+     --------------------------------------------------------------------- */
+
+  /* Surfaces (light) */
+  --paper:            #f7f6f3;  /* warm off-white, page base */
+  --paper-raised:     #fffefc;  /* lifted blocks */
+  --paper-sunken:     #edebe5;  /* recessed bands */
+  --paper-tint:       #e7e9e7;  /* faint cool tint for diagrams */
+
+  /* Ink */
+  --ink:              #14181b;  /* carbón, near-black — headings */
+  --ink-body:         #2e3639;  /* long-form body copy */
+  --ink-muted:        #566066;  /* secondary copy — AA on paper */
+  --ink-faint:        #646c70;  /* smallest text still meets AA on paper */
+  /* Display sizes only (>=24px), where AA asks 3:1 rather than 4.5:1.
+     Never use it for body or label text. */
+  --ink-quiet:        #7c8489;
+
+  /* Primary — azul petróleo */
+  --deep:             #0a2a33;  /* inverted section surface */
+  --deep-raised:      #103842;
+  --deep-line:        #1d4b57;
+  --on-deep:          #f2f4f3;
+  --on-deep-muted:    #a3b7bd;  /* AA on --deep */
+  --on-deep-faint:    #8da5ac;  /* AA on --deep at body sizes */
+
+  /* Accent — technological, used sparingly */
+  --accent:           #11a09b;  /* on dark surfaces / graphics */
+  --accent-ink:       #0a6b68;  /* accent as text on light — AA */
+  --accent-soft:      #dcebe9;  /* faint accent wash */
+
+  /* Feedback */
+  --danger:           #a3302a;
+  --danger-soft:      #f6e7e5;
+  --success:          #1f6b4f;
+  --success-soft:     #e2efe8;
+
+  /* Lines */
+  --line:             #dedbd3;
+  --line-strong:      #c6c2b8;
+
+  /* Semantic aliases resolved per-surface by [data-surface] below */
+  --surface:          var(--paper);
+  --fg:               var(--ink);
+  --fg-body:          var(--ink-body);
+  --fg-muted:         var(--ink-muted);
+  --fg-faint:         var(--ink-faint);
+  --rule:             var(--line);
+  --rule-strong:      var(--line-strong);
+  --mark:             var(--accent-ink);
+
+  /* Surface-aware component tokens — redefined per [data-surface] below */
+  --btn-bg:           var(--deep);
+  --btn-fg:           var(--on-deep);
+  --btn-bg-hover:     #061d24;
+  --wash:             rgba(20, 24, 27, 0.045);
+  --wash-strong:      rgba(20, 24, 27, 0.075);
+  --grid-line:        rgba(20, 24, 27, 0.055);
+
+  /* ---------------------------------------------------------------------
+     2. TYPOGRAPHY — fluid scale, 360px → 1440px
+     --------------------------------------------------------------------- */
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, -apple-system,
+               'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, 'Times New Roman', serif;
+
+  --fs-eyebrow:    0.75rem;
+  --fs-micro:      0.8125rem;
+  --fs-small:      0.9375rem;
+  --fs-body:       1rem;
+  --fs-body-lg:    clamp(1.0625rem, 1.015rem + 0.24vw, 1.1875rem);
+  --fs-lead:       clamp(1.125rem, 1.03rem + 0.47vw, 1.4375rem);
+  --fs-h4:         clamp(1.0625rem, 1.0rem + 0.3vw, 1.1875rem);
+  --fs-h3:         clamp(1.3125rem, 1.18rem + 0.65vw, 1.75rem);
+  --fs-h2:         clamp(2rem, 1.45rem + 2.7vw, 3.75rem);
+  --fs-h1:         clamp(2.625rem, 1.75rem + 4.3vw, 5rem);
+  --fs-statement:  clamp(2.125rem, 1.3rem + 4.1vw, 4.5rem);
+  --fs-metric:     clamp(2.5rem, 1.6rem + 4.4vw, 4.75rem);
+  --fs-metric-sm:  clamp(1.75rem, 1.35rem + 1.95vw, 2.75rem);
+
+  --lh-tight:   1.04;
+  --lh-snug:    1.14;
+  --lh-heading: 1.2;
+  --lh-body:    1.65;
+  --lh-relaxed: 1.72;
+
+  --ls-eyebrow:  0.14em;
+  --ls-tight:   -0.022em;
+  --ls-tighter: -0.034em;
+  --ls-normal:   0;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    680;
+
+  /* ---------------------------------------------------------------------
+     3. SPACE — 4px base
+     --------------------------------------------------------------------- */
+  --s-1:   0.25rem;
+  --s-2:   0.5rem;
+  --s-3:   0.75rem;
+  --s-4:   1rem;
+  --s-5:   1.25rem;
+  --s-6:   1.5rem;
+  --s-8:   2rem;
+  --s-10:  2.5rem;
+  --s-12:  3rem;
+  --s-16:  4rem;
+  --s-20:  5rem;
+  --s-24:  6rem;
+  --s-32:  8rem;
+  --s-40:  10rem;
+
+  /* Vertical rhythm — sections intentionally differ in density */
+  --section-y:       clamp(4.5rem, 3rem + 6vw, 9rem);
+  --section-y-tight: clamp(3.25rem, 2.4rem + 3.4vw, 5.5rem);
+  --section-y-loose: clamp(6rem, 3.6rem + 9.6vw, 13rem);
+
+  /* ---------------------------------------------------------------------
+     4. LAYOUT
+     --------------------------------------------------------------------- */
+  --w-content: 74.5rem;  /* 1192px — default measure */
+  --w-wide:    86rem;    /* 1376px — editorial wide blocks */
+  --w-narrow:  44rem;    /* 704px  — focused blocks */
+  --w-prose:   36rem;    /* reading measure */
+  --gutter:    clamp(1.25rem, 0.55rem + 3.5vw, 4rem);
+  --header-h:  4.5rem;
+
+  /* ---------------------------------------------------------------------
+     5. RADIUS — restrained; most edges stay sharp
+     --------------------------------------------------------------------- */
+  --r-xs:   2px;
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   14px;
+  --r-pill: 999px;
+
+  /* ---------------------------------------------------------------------
+     6. ELEVATION — two levels only
+     --------------------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(20, 24, 27, 0.04),
+               0 2px 8px rgba(20, 24, 27, 0.04);
+  --shadow-md: 0 2px 4px rgba(20, 24, 27, 0.04),
+               0 12px 32px -8px rgba(20, 24, 27, 0.1);
+
+  /* ---------------------------------------------------------------------
+     7. MOTION — natural easing, intentional durations
+     --------------------------------------------------------------------- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-soft:   cubic-bezier(0.33, 1, 0.68, 1);
+
+  --t-fast:   140ms;
+  --t-base:   260ms;
+  --t-slow:   560ms;
+  --t-reveal: 760ms;
+  /* Above-the-fold entrances: short enough not to hold back LCP */
+  --t-reveal-fast: 420ms;
+
+  --focus-ring: 2px;
+  --focus-offset: 3px;
+
+  /* Reveal distance — zeroed under reduced motion */
+  --reveal-shift: 18px;
+
+  --z-base: 1;
+  --z-sticky: 20;
+  --z-header: 50;
+  --z-overlay: 90;
+}
+
+/* -----------------------------------------------------------------------
+   Surface contexts — a section declares its surface, children inherit
+   the correct semantic colors. No component hardcodes light/dark logic.
+   ----------------------------------------------------------------------- */
+[data-surface='paper'] {
+  --surface: var(--paper);
+  --fg: var(--ink);
+  --fg-body: var(--ink-body);
+  --fg-muted: var(--ink-muted);
+  --fg-faint: var(--ink-faint);
+  --rule: var(--line);
+  --rule-strong: var(--line-strong);
+  --mark: var(--accent-ink);
+  --btn-bg: var(--deep);
+  --btn-fg: var(--on-deep);
+  --btn-bg-hover: #061d24;
+  --wash: rgba(20, 24, 27, 0.045);
+  --wash-strong: rgba(20, 24, 27, 0.075);
+  --grid-line: rgba(20, 24, 27, 0.055);
+}
+
+[data-surface='sunken'] {
+  --surface: var(--paper-sunken);
+  --fg: var(--ink);
+  --fg-body: var(--ink-body);
+  --fg-muted: var(--ink-muted);
+  --fg-faint: #5f676b;
+  --rule: #dad7ce;
+  --rule-strong: var(--line-strong);
+  --mark: var(--accent-ink);
+  --btn-bg: var(--deep);
+  --btn-fg: var(--on-deep);
+  --btn-bg-hover: #061d24;
+  --wash: rgba(20, 24, 27, 0.05);
+  --wash-strong: rgba(20, 24, 27, 0.08);
+  --grid-line: rgba(20, 24, 27, 0.06);
+}
+
+[data-surface='deep'] {
+  --surface: var(--deep);
+  --fg: var(--on-deep);
+  --fg-body: #dbe3e4;
+  --fg-muted: var(--on-deep-muted);
+  --fg-faint: var(--on-deep-faint);
+  --rule: var(--deep-line);
+  --rule-strong: #2c6472;
+  --mark: var(--accent);
+  --btn-bg: var(--paper);
+  --btn-fg: var(--deep);
+  --btn-bg-hover: #ffffff;
+  --wash: rgba(242, 244, 243, 0.06);
+  --wash-strong: rgba(242, 244, 243, 0.1);
+  --grid-line: rgba(163, 183, 189, 0.12);
+}
+
+/* -----------------------------------------------------------------------
+   Reduced motion — honoured globally and by every JS-driven animation
+   ----------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --reveal-shift: 0px;
+    --t-fast: 1ms;
+    --t-base: 1ms;
+    --t-slow: 1ms;
+    --t-reveal: 1ms;
+  }
+}

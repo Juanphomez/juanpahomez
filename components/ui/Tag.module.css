@@ -1,0 +1,40 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.3125rem 0.6875rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  color: var(--fg-muted);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-regular);
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+/* Plain variant: reads as a data label rather than a chip */
+.plain {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--fg-muted);
+}
+
+.solid {
+  background-color: var(--wash);
+  border-color: transparent;
+  color: var(--fg);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listWide {
+  gap: var(--s-3);
+}

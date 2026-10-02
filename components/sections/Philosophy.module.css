@@ -1,0 +1,64 @@
+/* A single sentence, given the room it deserves. */
+.layout {
+  display: grid;
+  gap: var(--s-8);
+  justify-items: start;
+}
+
+.quote {
+  margin: 0;
+  max-width: 26ch;
+  font-size: var(--fs-statement);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-tighter);
+  line-height: 1.08;
+  text-wrap: initial;
+}
+
+.lead {
+  display: block;
+  color: var(--fg-muted);
+}
+
+.turn {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.012em;
+  color: var(--fg);
+}
+
+.attribution {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin: 0;
+  color: var(--fg-faint);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+.attributionRule {
+  width: var(--s-10);
+  height: 1px;
+  background-color: var(--accent);
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    align-items: end;
+    gap: var(--s-12);
+  }
+
+  .quote {
+    max-width: 24ch;
+  }
+
+  .attribution {
+    justify-self: end;
+  }
+}

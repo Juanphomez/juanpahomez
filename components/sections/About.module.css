@@ -1,0 +1,115 @@
+.layout {
+  display: grid;
+  gap: var(--s-10);
+}
+
+.visual {
+  display: grid;
+  gap: var(--s-5);
+  align-content: start;
+  max-width: 22rem;
+}
+
+.portrait {
+  border-radius: var(--r-sm);
+}
+
+.signature {
+  display: grid;
+  gap: var(--s-1);
+}
+
+.signatureName {
+  color: var(--fg);
+  font-family: var(--font-serif);
+  font-size: var(--fs-h3);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.signatureRole {
+  color: var(--fg-muted);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.02em;
+}
+
+.body {
+  display: grid;
+  gap: var(--s-6);
+  align-content: start;
+}
+
+.title {
+  margin: 0;
+  max-width: 26ch;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: var(--lh-snug);
+}
+
+.copy {
+  display: grid;
+  gap: var(--s-5);
+  max-width: 56ch;
+  color: var(--fg-body);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-relaxed);
+}
+
+/* The sentence the whole story turns on */
+.turn {
+  margin: 0;
+  padding: var(--s-5) 0 var(--s-5) var(--s-6);
+  border-left: 2px solid var(--accent);
+  color: var(--fg);
+  font-family: var(--font-serif);
+  font-size: var(--fs-lead);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.convergence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--fg);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight);
+}
+
+.convergence li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.convergence li:not(:last-child)::after {
+  content: '+';
+  color: var(--accent-ink);
+  font-weight: var(--fw-regular);
+}
+
+@media (min-width: 60rem) {
+  .layout {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--s-16);
+    align-items: start;
+  }
+
+  .visual {
+    max-width: none;
+  }
+}
+
+@media (min-width: 75rem) {
+  .layout {
+    grid-template-columns: minmax(0, 3.5fr) minmax(0, 8fr);
+    gap: var(--s-20);
+  }
+}

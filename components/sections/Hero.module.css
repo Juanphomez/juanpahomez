@@ -1,0 +1,244 @@
+/* =========================================================================
+   Hero. The headline holds the full measure of the page; the copy, the
+   portrait and the figures share the row underneath. Giving the H1 its own
+   row is what lets it stay two lines at display size.
+   ========================================================================= */
+
+.hero {
+  display: flex;
+  align-items: center;
+  padding-block: var(--s-16) var(--s-20);
+}
+
+.layout {
+  display: grid;
+  gap: var(--s-10) var(--s-8);
+  width: 100%;
+}
+
+/* --- Opening: eyebrow + headline ---------------------------------------- */
+.opening {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: var(--lh-tight);
+  /* Lines are authored, so automatic balancing must not re-break them */
+  text-wrap: initial;
+}
+
+/* One serif italic word carries the editorial voice without a second system */
+.title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.015em;
+}
+
+/* --- Lead: supporting copy and the two calls to action ------------------- */
+.lead {
+  display: grid;
+  gap: var(--s-6);
+  align-content: start;
+  justify-items: start;
+}
+
+.body {
+  display: grid;
+  gap: var(--s-4);
+  max-width: 46ch;
+  color: var(--fg-body);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+.bodySecondary {
+  color: var(--fg-muted);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4);
+}
+
+/* --- Visual: portrait and the figures that annotate it ------------------ */
+.visual {
+  display: grid;
+  gap: var(--s-6);
+  align-content: start;
+}
+
+.portrait {
+  position: relative;
+  /* Without a cap a full-width 4:5 frame becomes taller than the screen
+     between phone and tablet widths. */
+  max-width: 22rem;
+  border-radius: var(--r-sm);
+}
+
+/* A hairline frame: a quiet technical register, not a card border */
+.portrait::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(20, 24, 27, 0.08);
+  border-radius: inherit;
+}
+
+/* --- Annotation rail: figures read as margin notes on a photograph ------ */
+.rail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.railItem {
+  position: relative;
+  padding: var(--s-5) var(--s-4) var(--s-4) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.railItem:nth-child(odd) {
+  border-right: 1px solid var(--rule);
+  padding-right: var(--s-5);
+}
+
+.railItem:nth-child(even) {
+  padding-left: var(--s-5);
+}
+
+/* The tick that attaches each note to the rule above it */
+.railItem::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: var(--s-5);
+  height: 2px;
+  background-color: var(--accent);
+}
+
+.railItem:nth-child(even)::before {
+  left: var(--s-5);
+}
+
+/* --- Tablet: four figures in a row beneath the portrait ----------------- */
+@media (min-width: 40rem) {
+  .rail {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--s-5);
+  }
+
+  .railItem,
+  .railItem:nth-child(odd),
+  .railItem:nth-child(even) {
+    padding: var(--s-5) var(--s-3) 0 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .railItem:nth-child(even)::before {
+    left: 0;
+  }
+}
+
+@media (min-width: 48rem) {
+  .hero {
+    padding-block: var(--s-20) var(--s-24);
+  }
+
+  .layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .opening {
+    grid-column: 1 / -1;
+  }
+
+  .lead {
+    grid-column: 1 / span 7;
+  }
+
+  .portrait {
+    max-width: none;
+  }
+
+  /* The portrait and its figures sit side by side from here up */
+  .visual {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: var(--s-8);
+    align-items: end;
+  }
+
+  .rail {
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 0;
+    border-top: 0;
+  }
+
+  .railItem,
+  .railItem:nth-child(odd),
+  .railItem:nth-child(even) {
+    padding: var(--s-4) 0 var(--s-5);
+    border-top: 1px solid var(--rule);
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .railItem:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .railItem:first-child::before {
+    display: none;
+  }
+
+  .railItem::before,
+  .railItem:nth-child(even)::before {
+    left: 0;
+  }
+}
+
+/* --- Desktop: headline across the top, copy and portrait side by side --- */
+@media (min-width: 64rem) {
+  .hero {
+    min-height: min(92vh, 58rem);
+    padding-block: var(--s-16) var(--s-20);
+  }
+
+  .layout {
+    gap: var(--s-12) var(--s-8);
+    align-content: center;
+  }
+
+  .opening {
+    grid-column: 1 / span 11;
+    grid-row: 1;
+  }
+
+  .lead {
+    grid-column: 1 / span 5;
+    grid-row: 2;
+    align-content: start;
+  }
+
+  .visual {
+    grid-column: 7 / -1;
+    grid-row: 2;
+  }
+}

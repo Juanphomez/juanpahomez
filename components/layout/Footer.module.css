@@ -1,0 +1,113 @@
+.footer {
+  background-color: var(--surface);
+  color: var(--fg-body);
+  padding-block: var(--section-y-tight) var(--s-10);
+}
+
+.top {
+  display: grid;
+  gap: var(--s-12);
+  padding-bottom: var(--s-12);
+  border-bottom: 1px solid var(--rule);
+}
+
+.identity {
+  max-width: 34ch;
+}
+
+.name {
+  margin-bottom: var(--s-3);
+  color: var(--fg);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.15;
+}
+
+.descriptor {
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-8);
+}
+
+.columnTitle {
+  margin-bottom: var(--s-4);
+  color: var(--fg-faint);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  text-decoration: none;
+  transition: color var(--t-base) var(--ease-out);
+  overflow-wrap: anywhere;
+}
+
+.link:hover {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-top: var(--s-8);
+  color: var(--fg-faint);
+  font-size: var(--fs-micro);
+}
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background-color: var(--accent);
+  flex: none;
+}
+
+@media (min-width: 48rem) {
+  .top {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: var(--s-16);
+  }
+}
+
+@media (min-width: 64rem) {
+  .top {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+
+  .columns {
+    gap: var(--s-12);
+  }
+}

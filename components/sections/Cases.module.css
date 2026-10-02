@@ -1,0 +1,214 @@
+/* =========================================================================
+   Applied experience. Three rows, three different compositions — the figure
+   leads the first, the sequence leads the second, the reasoning leads the
+   third. Deliberately not three identical cards.
+   ========================================================================= */
+
+.header {
+  display: grid;
+  gap: var(--s-5);
+  margin-bottom: var(--s-12);
+}
+
+.title {
+  margin: 0;
+  max-width: 24ch;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: var(--lh-snug);
+}
+
+.list {
+  display: grid;
+  gap: var(--s-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.case {
+  display: grid;
+  gap: var(--s-8);
+  padding-top: var(--s-8);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  color: var(--fg-muted);
+  font-size: var(--fs-micro);
+}
+
+.index {
+  color: var(--fg);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+}
+
+.eyebrowText {
+  color: var(--fg-muted);
+  letter-spacing: 0.02em;
+}
+
+.body {
+  display: grid;
+  gap: var(--s-5);
+  align-content: start;
+}
+
+.caseTitle {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(1.625rem, 1.25rem + 1.8vw, 2.5rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: 1.12;
+}
+
+.summary {
+  margin: 0;
+  max-width: 54ch;
+  color: var(--fg-body);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-relaxed);
+}
+
+.problem {
+  margin: 0;
+  max-width: 48ch;
+  padding-left: var(--s-5);
+  border-left: 1px solid var(--rule-strong);
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.approachTitle {
+  margin: 0 0 var(--s-3);
+  color: var(--fg-faint);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+.approach {
+  display: grid;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.approach li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--s-3);
+  color: var(--fg-body);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+/* A hairline tick instead of a bullet — reads as a step, not a feature */
+.approach li::before {
+  content: '';
+  margin-top: 0.6875rem;
+  width: var(--s-4);
+  height: 1px;
+  background-color: var(--accent);
+}
+
+.aside {
+  display: grid;
+  gap: var(--s-8);
+  align-content: start;
+}
+
+/* --- Figures: the result, at display size ------------------------------- */
+.figures {
+  display: grid;
+  gap: var(--s-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.figure {
+  display: grid;
+  gap: var(--s-2);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+}
+
+.figureValue {
+  color: var(--fg);
+  font-size: clamp(2.25rem, 1.5rem + 3.4vw, 3.75rem);
+  font-weight: var(--fw-medium);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--ls-tighter);
+  line-height: 0.95;
+}
+
+.figureLabel {
+  color: var(--fg-muted);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+}
+
+.tags {
+  margin-top: var(--s-2);
+}
+
+.cta {
+  justify-self: start;
+  margin-top: var(--s-2);
+}
+
+@media (min-width: 60rem) {
+  .list {
+    gap: var(--s-20);
+  }
+
+  .case {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--s-10) var(--s-8);
+  }
+
+  .meta {
+    grid-column: 1 / -1;
+  }
+
+  /* 01 — figure-led: the result sits opposite the headline */
+  .case[data-layout='figure'] .body {
+    grid-column: 1 / span 6;
+  }
+
+  .case[data-layout='figure'] .aside {
+    grid-column: 8 / span 5;
+  }
+
+  /* 02 — sequence-led: figure first, reasoning beside it */
+  .case[data-layout='sequence'] .aside {
+    grid-column: 1 / span 5;
+    grid-row: 2;
+  }
+
+  .case[data-layout='sequence'] .body {
+    grid-column: 7 / span 6;
+    grid-row: 2;
+  }
+
+  /* 03 — reasoning-led: wide text, supporting detail indented */
+  .case[data-layout='reasoning'] .body {
+    grid-column: 1 / span 7;
+  }
+
+  .case[data-layout='reasoning'] .aside {
+    grid-column: 9 / span 4;
+  }
+}

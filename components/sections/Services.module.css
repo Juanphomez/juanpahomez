@@ -1,0 +1,235 @@
+/* =========================================================================
+   Services. Desktop: a sticky index on the left, one detail panel on the
+   right. Mobile: a plain accordion — a sticky rail on a small screen would
+   cost height without adding orientation.
+   ========================================================================= */
+
+.header {
+  display: grid;
+  gap: var(--s-5);
+  margin-bottom: var(--s-12);
+  /* In rem, not ch: ch resolves against this element's 1rem font size, which
+     would crush the display heading inside it. */
+  max-width: 44rem;
+}
+
+.title {
+  margin: 0;
+  max-width: 14ch;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: var(--lh-snug);
+}
+
+/* --- Mobile / tablet: accordion ----------------------------------------- */
+.accordion {
+  display: grid;
+  border-top: 1px solid var(--rule);
+}
+
+.item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--s-4);
+  width: 100%;
+  padding: var(--s-5) 0;
+  text-align: left;
+  color: var(--fg);
+  transition: color var(--t-base) var(--ease-out);
+}
+
+.trigger:hover {
+  color: var(--mark);
+}
+
+.index {
+  color: var(--fg-faint);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+
+.triggerName {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.2;
+}
+
+.triggerIcon {
+  align-self: center;
+  color: var(--fg-muted);
+  transition: transform var(--t-base) var(--ease-out);
+}
+
+.panel {
+  padding-bottom: var(--s-8);
+}
+
+/* --- Detail content, shared by both layouts ----------------------------- */
+.detail {
+  display: grid;
+  gap: var(--s-6);
+  align-content: start;
+}
+
+.detailHeadline {
+  margin: 0;
+  max-width: 28ch;
+  font-family: var(--font-serif);
+  font-size: clamp(1.625rem, 1.2rem + 2vw, 2.75rem);
+  font-weight: var(--fw-regular);
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--fg);
+}
+
+.detailBody {
+  display: grid;
+  gap: var(--s-4);
+  max-width: 54ch;
+  color: var(--fg-body);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-relaxed);
+}
+
+.examplesTitle {
+  margin: 0 0 var(--s-4);
+  color: var(--fg-faint);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+/* Examples as a two-column rule-separated list — information, not chips */
+.examples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--s-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.examples li {
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--rule);
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+
+.detailCta {
+  margin-top: var(--s-2);
+  justify-self: start;
+}
+
+/* --- Desktop: sticky index + detail ------------------------------------- */
+.split {
+  display: none;
+}
+
+@media (min-width: 60rem) {
+  .accordion {
+    display: none;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--s-16);
+    align-items: start;
+  }
+
+  .rail {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-10));
+  }
+
+  .railList {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+
+  .railItem {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .railButton {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--s-4);
+    width: 100%;
+    padding: var(--s-4) 0;
+    text-align: left;
+    color: var(--fg-muted);
+    transition: color var(--t-base) var(--ease-out), padding-left var(--t-base) var(--ease-out);
+  }
+
+  .railButton:hover {
+    color: var(--fg);
+  }
+
+  .railButton[aria-selected='true'] {
+    color: var(--fg);
+    padding-left: var(--s-3);
+  }
+
+  .railName {
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-tight);
+    line-height: 1.3;
+  }
+
+  /* The active marker is a rule, not just a colour */
+  .railItem {
+    position: relative;
+  }
+
+  .railItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--t-base) var(--ease-out);
+  }
+
+  .railItem[data-active='true']::before {
+    transform: scaleY(1);
+  }
+
+  .detailWrap {
+    min-height: 32rem;
+  }
+
+  .detail {
+    gap: var(--s-8);
+  }
+
+  .examples {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 75rem) {
+  .split {
+    grid-template-columns: minmax(0, 3.5fr) minmax(0, 8.5fr);
+  }
+}

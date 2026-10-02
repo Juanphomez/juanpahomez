@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  max-width: calc(var(--w-content) + var(--gutter) * 2);
+}
+
+.wide {
+  max-width: calc(var(--w-wide) + var(--gutter) * 2);
+}
+
+.narrow {
+  max-width: calc(var(--w-narrow) + var(--gutter) * 2);
+}
+
+/* Breaks out of the container to the full viewport width, keeping the gutter */
+.full {
+  max-width: none;
+}
