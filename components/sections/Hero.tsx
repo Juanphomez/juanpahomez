@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { Section } from '@/components/layout/Section';
 import { Container } from '@/components/layout/Container';
 import { Eyebrow } from '@/components/ui/Eyebrow';
@@ -29,9 +30,11 @@ export function Hero() {
               fast
               lines={[
                 'Menos procesos manuales.',
-                <>
+                // An element inside an array literal is a list to React, so it
+                // needs its own key even though LineReveal keys the lines too.
+                <Fragment key="decidir">
                   Más información para <em>decidir</em>.
-                </>,
+                </Fragment>,
               ]}
             />
           </div>
