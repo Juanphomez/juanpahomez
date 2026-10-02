@@ -3,7 +3,7 @@
   align-items: center;
   gap: var(--s-3);
   margin: 0;
-  color: var(--fg-muted);
+  color: var(--mark);
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-medium);
   letter-spacing: var(--ls-eyebrow);
@@ -17,17 +17,14 @@
   flex: none;
   width: var(--s-6);
   height: 1px;
-  background-color: var(--rule-strong);
+  background-color: var(--mark);
+  opacity: 0.55;
 }
 
 @media (min-width: 30rem) {
   .ruled::before {
     width: var(--s-8);
   }
-}
-
-.marked {
-  color: var(--mark);
 }
 
 /* When the label has to wrap, split it evenly instead of orphaning a word */

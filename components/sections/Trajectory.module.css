@@ -1,0 +1,393 @@
+/* =========================================================================
+   Trajectory. A stacked area where every band is one domain that entered the
+   practice and never left — so the line only goes up, because the claim is
+   accumulation, not replacement.
+
+   The bands are SVG drawn in a 0–100 coordinate space with
+   preserveAspectRatio="none", and every label is HTML positioned on top. That
+   way the geometry stretches to any width while the type keeps its own scale.
+   ========================================================================= */
+
+.header {
+  display: grid;
+  gap: var(--s-5);
+  margin-bottom: var(--s-10);
+  max-width: 40rem;
+}
+
+.title {
+  margin: 0;
+  max-width: 20ch;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: var(--lh-snug);
+}
+
+.lead {
+  margin: 0;
+  max-width: 48ch;
+  color: var(--fg-muted);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-relaxed);
+}
+
+/* --- Chart -------------------------------------------------------------- */
+.chart {
+  display: grid;
+  gap: var(--s-4);
+}
+
+/* Three columns — scale, plot, direct labels — plus a second row for the time
+   axis, so the axis lines up with the plot and nothing else. */
+.plotFrame {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: var(--s-3);
+}
+
+.yAxis {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.plot {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.bandLabels {
+  display: none;
+}
+
+.xAxis {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.yAxis {
+  position: relative;
+  width: 1rem;
+  color: var(--fg-faint);
+  font-size: var(--fs-eyebrow);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Ticks are placed by value rather than distributed, because the scale keeps
+   headroom above the top band for its label. */
+.yTick {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.plot {
+  position: relative;
+  /* Height is derived from width. A min-height here would invert that and let
+     aspect-ratio force the width past the viewport. */
+  aspect-ratio: 5 / 4;
+}
+
+.bands {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.band {
+  transition: opacity var(--t-base) var(--ease-out);
+}
+
+/* Highlighting one era recedes the others rather than repainting them */
+.plot[data-active='true'] .band {
+  opacity: 0.28;
+}
+
+.plot[data-active='true'] .band[data-on='true'] {
+  opacity: 1;
+}
+
+.grid line {
+  stroke: var(--rule);
+}
+
+.baseline {
+  stroke: var(--rule-strong);
+}
+
+/* --- Labels on the plot ------------------------------------------------- */
+.bandLabel {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  transform: translateY(-50%);
+  color: var(--fg);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity var(--t-base) var(--ease-out);
+}
+
+/* Highlighting an era dims the other labels with their bands */
+.plotFrame[data-active='true'] .bandLabel {
+  opacity: 0.3;
+}
+
+.plotFrame[data-active='true'] .bandLabel[data-on='true'] {
+  opacity: 1;
+}
+
+/* The dot that marks where a domain entered */
+.labelSwatch {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+.milestone {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: var(--r-pill);
+  background-color: var(--surface);
+  box-shadow: 0 0 0 2px currentColor;
+  pointer-events: none;
+}
+
+.today {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background-color: var(--amber);
+}
+
+.todayDot {
+  position: absolute;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: var(--r-pill);
+  background-color: var(--amber);
+}
+
+
+
+.xAxis {
+  position: relative;
+  height: 1.5rem;
+  padding-top: var(--s-2);
+}
+
+.xTick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  color: var(--fg-faint);
+  font-size: var(--fs-eyebrow);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* On a narrow axis the last year label collides with "Hoy". The year is still
+   in the legend below, so the tick is the one that gives way. */
+@media (max-width: 47.9375rem) {
+  .xTick:nth-last-child(2) {
+    display: none;
+  }
+}
+
+/* "Hoy" closes the axis, in the colour that marks it on the plot */
+.xTickToday {
+  right: 0;
+  left: auto;
+  transform: none;
+  color: var(--amber);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+.axisCaption {
+  margin: 0;
+  color: var(--fg-faint);
+  font-size: var(--fs-micro);
+  line-height: 1.5;
+}
+
+/* --- Eras: the legend, the detail and the table view, all at once -------- */
+.eras {
+  display: grid;
+  gap: 0;
+  margin: var(--s-12) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.era {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-5) 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: default;
+  transition: background-color var(--t-base) var(--ease-out);
+}
+
+.era:hover,
+.era:focus-within {
+  background-color: var(--wash);
+}
+
+.eraHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.period {
+  color: var(--fg-muted);
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.06em;
+}
+
+.eraTitle {
+  margin: 0;
+  color: var(--fg);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tight);
+  line-height: 1.25;
+}
+
+.note {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--fg-muted);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+.capabilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-3);
+  margin: var(--s-1) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--fg-body);
+  font-size: var(--fs-micro);
+}
+
+.capabilities li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.capabilities li:not(:last-child)::after {
+  content: '';
+  width: 2px;
+  height: 2px;
+  border-radius: var(--r-pill);
+  background-color: var(--rule-strong);
+}
+
+/* --- Today ------------------------------------------------------------- */
+.convergence {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-10);
+  padding-top: var(--s-8);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.convergenceLabel {
+  color: var(--amber);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+}
+
+.convergenceTitle {
+  margin: 0;
+  max-width: 24ch;
+  color: var(--fg);
+  font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.25rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-tighter);
+  line-height: 1.15;
+}
+
+@media (min-width: 30rem) {
+  .plot {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (min-width: 48rem) {
+  .plot {
+    aspect-ratio: 16 / 6;
+  }
+
+  /* Room for the direct-label gutter once the screen can spare it */
+  .plotFrame {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .bandLabels {
+    display: block;
+    position: relative;
+    grid-column: 3;
+    grid-row: 1;
+    width: 7.5rem;
+    margin-left: var(--s-4);
+  }
+
+  .eras {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--s-8);
+  }
+
+  .era {
+    border-bottom: 0;
+  }
+
+  .convergence {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: baseline;
+    gap: var(--s-8);
+  }
+}
+
+@media (min-width: 64rem) {
+  .header {
+    margin-bottom: var(--s-12);
+  }
+
+  .plot {
+    aspect-ratio: 16 / 5.5;
+  }
+}

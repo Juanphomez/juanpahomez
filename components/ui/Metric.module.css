@@ -38,6 +38,7 @@
 .affix {
   /* Units such as " años" carry their own leading space */
   white-space: pre;
+  color: var(--mark);
   font-size: 0.62em;
   font-weight: var(--fw-regular);
   letter-spacing: var(--ls-tight);

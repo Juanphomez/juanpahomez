@@ -8,43 +8,56 @@
      1. COLOR — base paper, ink, deep petrol primary, one controlled accent
      --------------------------------------------------------------------- */
 
-  /* Surfaces (light) */
-  --paper:            #f7f6f3;  /* warm off-white, page base */
-  --paper-raised:     #fffefc;  /* lifted blocks */
-  --paper-sunken:     #edebe5;  /* recessed bands */
-  --paper-tint:       #e7e9e7;  /* faint cool tint for diagrams */
+  /* Surfaces (light) — cool, blue-cast neutrals rather than warm grey */
+  --paper:            #f6f8fb;  /* page base */
+  --paper-raised:     #ffffff;  /* lifted blocks */
+  --paper-sunken:     #e7edf6;  /* recessed bands */
+  --paper-tint:       #dfe8f4;  /* faint wash for diagrams */
 
-  /* Ink */
-  --ink:              #14181b;  /* carbón, near-black — headings */
-  --ink-body:         #2e3639;  /* long-form body copy */
-  --ink-muted:        #566066;  /* secondary copy — AA on paper */
-  --ink-faint:        #646c70;  /* smallest text still meets AA on paper */
-  /* Display sizes only (>=24px), where AA asks 3:1 rather than 4.5:1.
-     Never use it for body or label text. */
-  --ink-quiet:        #7c8489;
+  /* Ink — near-black with a blue cast, so text belongs to the palette */
+  --ink:              #0f1b2a;  /* headings */
+  --ink-body:         #2b3a4d;  /* long-form copy */
+  --ink-muted:        #4e6075;  /* secondary copy — AA on paper and sunken */
+  --ink-faint:        #5b6e85;  /* smallest labels — still AA */
+  --ink-quiet:        #7187a1;  /* display sizes only (>=24px), where AA is 3:1 */
 
-  /* Primary — azul petróleo */
-  --deep:             #0a2a33;  /* inverted section surface */
-  --deep-raised:      #103842;
-  --deep-line:        #1d4b57;
-  --on-deep:          #f2f4f3;
-  --on-deep-muted:    #a3b7bd;  /* AA on --deep */
-  --on-deep-faint:    #8da5ac;  /* AA on --deep at body sizes */
+  /* Primary — navy. The brand's anchor and the inverted surface. */
+  --deep:             #0b2545;
+  --deep-raised:      #12325a;
+  --deep-line:        #1b3c66;
+  --on-deep:          #eaf1fa;
+  --on-deep-body:     #d3e0f0;
+  --on-deep-muted:    #a8bdd8;
+  --on-deep-faint:    #8099bb;
 
-  /* Accent — technological, used sparingly */
-  --accent:           #11a09b;  /* on dark surfaces / graphics */
-  --accent-ink:       #0a6b68;  /* accent as text on light — AA */
-  --accent-soft:      #dcebe9;  /* faint accent wash */
+  /* Accent — blue. Carries emphasis, marks and interactive state. */
+  --accent:           #4d9fe8;  /* on navy */
+  --accent-ink:       #1c5cab;  /* as text on light — AA */
+  --accent-strong:    #184f95;
+  --accent-soft:      #dce9f7;
+
+  /* Second accent — amber. Deliberately rare: it marks "now" and the single
+     most important figure in a view. Used anywhere else it stops working. */
+  --amber:            #f0a63c;  /* on navy */
+  --amber-ink:        #8a4a0a;  /* as text on light — AA */
+  --amber-soft:       #fbeedd;
+
+  /* Trajectory chart — one hue, monotone lightness, validated as an ordinal
+     ramp against the navy surface (see components/sections/Trajectory). */
+  --layer-1:          #2a78d6;  /* earliest era, foot of the stack */
+  --layer-2:          #5598e7;
+  --layer-3:          #9ec5f4;
+  --layer-4:          #cde2fb;  /* most recent era, top of the stack */
 
   /* Feedback */
   --danger:           #a3302a;
-  --danger-soft:      #f6e7e5;
-  --success:          #1f6b4f;
-  --success-soft:     #e2efe8;
+  --danger-soft:      #f7e6e4;
+  --success:          #1a6b4a;
+  --success-soft:     #e0efe8;
 
   /* Lines */
-  --line:             #dedbd3;
-  --line-strong:      #c6c2b8;
+  --line:             #d4dfee;
+  --line-strong:      #b3c5de;
 
   /* Semantic aliases resolved per-surface by [data-surface] below */
   --surface:          var(--paper);
@@ -59,10 +72,10 @@
   /* Surface-aware component tokens — redefined per [data-surface] below */
   --btn-bg:           var(--deep);
   --btn-fg:           var(--on-deep);
-  --btn-bg-hover:     #061d24;
-  --wash:             rgba(20, 24, 27, 0.045);
-  --wash-strong:      rgba(20, 24, 27, 0.075);
-  --grid-line:        rgba(20, 24, 27, 0.055);
+  --btn-bg-hover:     #061a33;
+  --wash:             rgba(15, 27, 42, 0.045);
+  --wash-strong:      rgba(15, 27, 42, 0.075);
+  --grid-line:        rgba(28, 92, 171, 0.08);
 
   /* ---------------------------------------------------------------------
      2. TYPOGRAPHY — fluid scale, 360px → 1440px
@@ -146,10 +159,11 @@
   /* ---------------------------------------------------------------------
      6. ELEVATION — two levels only
      --------------------------------------------------------------------- */
-  --shadow-sm: 0 1px 2px rgba(20, 24, 27, 0.04),
-               0 2px 8px rgba(20, 24, 27, 0.04);
-  --shadow-md: 0 2px 4px rgba(20, 24, 27, 0.04),
-               0 12px 32px -8px rgba(20, 24, 27, 0.1);
+  --shadow-sm: 0 1px 2px rgba(11, 37, 69, 0.05),
+               0 2px 8px rgba(11, 37, 69, 0.05);
+  --shadow-md: 0 2px 4px rgba(11, 37, 69, 0.05),
+               0 12px 32px -8px rgba(11, 37, 69, 0.13);
+  --shadow-blue: 0 10px 34px -12px rgba(28, 92, 171, 0.42);
 
   /* ---------------------------------------------------------------------
      7. MOTION — natural easing, intentional durations
@@ -192,10 +206,10 @@
   --mark: var(--accent-ink);
   --btn-bg: var(--deep);
   --btn-fg: var(--on-deep);
-  --btn-bg-hover: #061d24;
-  --wash: rgba(20, 24, 27, 0.045);
-  --wash-strong: rgba(20, 24, 27, 0.075);
-  --grid-line: rgba(20, 24, 27, 0.055);
+  --btn-bg-hover: #061a33;
+  --wash: rgba(15, 27, 42, 0.045);
+  --wash-strong: rgba(15, 27, 42, 0.075);
+  --grid-line: rgba(28, 92, 171, 0.08);
 }
 
 [data-surface='sunken'] {
@@ -203,33 +217,33 @@
   --fg: var(--ink);
   --fg-body: var(--ink-body);
   --fg-muted: var(--ink-muted);
-  --fg-faint: #5f676b;
-  --rule: #dad7ce;
+  --fg-faint: #55687f;
+  --rule: #c9d7ea;
   --rule-strong: var(--line-strong);
   --mark: var(--accent-ink);
   --btn-bg: var(--deep);
   --btn-fg: var(--on-deep);
-  --btn-bg-hover: #061d24;
-  --wash: rgba(20, 24, 27, 0.05);
-  --wash-strong: rgba(20, 24, 27, 0.08);
-  --grid-line: rgba(20, 24, 27, 0.06);
+  --btn-bg-hover: #061a33;
+  --wash: rgba(15, 27, 42, 0.05);
+  --wash-strong: rgba(15, 27, 42, 0.08);
+  --grid-line: rgba(28, 92, 171, 0.09);
 }
 
 [data-surface='deep'] {
   --surface: var(--deep);
   --fg: var(--on-deep);
-  --fg-body: #dbe3e4;
+  --fg-body: var(--on-deep-body);
   --fg-muted: var(--on-deep-muted);
   --fg-faint: var(--on-deep-faint);
   --rule: var(--deep-line);
-  --rule-strong: #2c6472;
+  --rule-strong: #2a5688;
   --mark: var(--accent);
   --btn-bg: var(--paper);
   --btn-fg: var(--deep);
   --btn-bg-hover: #ffffff;
-  --wash: rgba(242, 244, 243, 0.06);
-  --wash-strong: rgba(242, 244, 243, 0.1);
-  --grid-line: rgba(163, 183, 189, 0.12);
+  --wash: rgba(234, 241, 250, 0.07);
+  --wash-strong: rgba(234, 241, 250, 0.11);
+  --grid-line: rgba(168, 189, 216, 0.14);
 }
 
 /* -----------------------------------------------------------------------

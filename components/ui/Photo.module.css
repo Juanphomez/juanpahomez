@@ -23,8 +23,8 @@
   padding: var(--s-6);
   background-color: var(--paper-sunken);
   background-image:
-    linear-gradient(to right, rgba(20, 24, 27, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(20, 24, 27, 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgba(28, 92, 171, 0.075) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 92, 171, 0.075) 1px, transparent 1px);
   background-size: 2.5rem 2.5rem;
   text-align: center;
 }

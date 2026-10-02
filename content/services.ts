@@ -3,6 +3,22 @@
  * problem first and names technology second.
  */
 
+/**
+ * A piece of supporting material attached to a service: a recorded talk, a
+ * webinar, a business case, a dashboard. Leave `url` out while something is
+ * still in preparation — the card then says so instead of linking nowhere.
+ *
+ * Nothing is listed here yet. Adding one is a data change, not a code change.
+ */
+export type ServiceResource = {
+  kind: 'video' | 'webinar' | 'caso' | 'tablero' | 'articulo';
+  title: string;
+  /** Omit while unpublished. */
+  url?: string;
+  /** e.g. "42 min", "2024". Shown beside the title when present. */
+  meta?: string;
+};
+
 export type Service = {
   id: string;
   /** Display index — part of the editorial composition. */
@@ -19,6 +35,8 @@ export type Service = {
   cta: string;
   /** Future dedicated route. */
   slug: string;
+  /** Talks, webinars, cases and dashboards. Empty until there is real material. */
+  resources: readonly ServiceResource[];
 };
 
 export const services: readonly Service[] = [
@@ -43,6 +61,7 @@ export const services: readonly Service[] = [
     ],
     cta: 'Explorar automatización',
     slug: 'automatizacion',
+    resources: [],
   },
   {
     id: 'datos',
@@ -65,6 +84,7 @@ export const services: readonly Service[] = [
     ],
     cta: 'Convertir datos en decisiones',
     slug: 'datos-bi',
+    resources: [],
   },
   {
     id: 'producto',
@@ -87,6 +107,7 @@ export const services: readonly Service[] = [
     ],
     cta: 'Construir un producto',
     slug: 'producto',
+    resources: [],
   },
   {
     id: 'web',
@@ -109,6 +130,7 @@ export const services: readonly Service[] = [
     ],
     cta: 'Crear mi presencia digital',
     slug: 'desarrollo-web',
+    resources: [],
   },
   {
     id: 'formacion',
@@ -131,5 +153,6 @@ export const services: readonly Service[] = [
     ],
     cta: 'Invítame a una conferencia',
     slug: 'formacion',
+    resources: [],
   },
 ] as const;

@@ -20,7 +20,7 @@ export function Contact() {
         <div className={styles.layout}>
           <div className={styles.intro}>
             <Reveal>
-              <Eyebrow marked>Hablemos</Eyebrow>
+              <Eyebrow>Hablemos</Eyebrow>
             </Reveal>
 
             <LineReveal

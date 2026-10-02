@@ -12,7 +12,7 @@ const CONVERGENCE = ['Finanzas', 'Datos', 'Tecnología', 'Negocio'];
 
 export function About() {
   return (
-    <Section id="sobre-mi" label="Sobre mí">
+    <Section id="sobre-mi" surface="sunken" label="Sobre mí">
       <Container size="wide">
         <div className={styles.layout}>
           <div className={styles.visual}>

@@ -5,9 +5,31 @@
    ========================================================================= */
 
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
   padding-block: var(--s-16) var(--s-20);
+  isolation: isolate;
+}
+
+/* Two soft blue fields give the fold depth without tinting the text */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      62rem 36rem at 78% 18%,
+      rgba(77, 159, 232, 0.17),
+      transparent 68%
+    ),
+    radial-gradient(
+      48rem 30rem at 6% 72%,
+      rgba(28, 92, 171, 0.09),
+      transparent 70%
+    );
 }
 
 .layout {
@@ -91,8 +113,12 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  border: 1px solid rgba(20, 24, 27, 0.08);
+  border: 1px solid rgba(11, 37, 69, 0.1);
   border-radius: inherit;
+}
+
+.portrait {
+  box-shadow: var(--shadow-blue);
 }
 
 /* --- Annotation rail: figures read as margin notes on a photograph ------ */

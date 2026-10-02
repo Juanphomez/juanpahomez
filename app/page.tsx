@@ -7,7 +7,7 @@ import { Method } from '@/components/sections/Method';
 import { Philosophy } from '@/components/sections/Philosophy';
 import { Cases } from '@/components/sections/Cases';
 import { About } from '@/components/sections/About';
-import { Timeline } from '@/components/sections/Timeline';
+import { Trajectory } from '@/components/sections/Trajectory';
 import { Toolkit } from '@/components/sections/Toolkit';
 import { Talks } from '@/components/sections/Talks';
 import { Insights } from '@/components/sections/Insights';
@@ -31,7 +31,7 @@ export default function HomePage() {
       <Philosophy />
       <Cases />
       <About />
-      <Timeline />
+      <Trajectory />
       <Toolkit />
       <Talks />
       <Insights />

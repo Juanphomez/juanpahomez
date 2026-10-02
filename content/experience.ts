@@ -6,6 +6,13 @@
 export type Era = {
   id: string;
   period: string;
+  /**
+   * Year this capability entered the practice. It is the x position on the
+   * trajectory chart, and the chart's only quantitative claim is a count:
+   * how many of these domains were in play at a given year. Nothing here is
+   * a score or an invented level.
+   */
+  startYear: number;
   title: string;
   /** One line explaining what this era added. */
   note: string;
@@ -16,6 +23,7 @@ export const eras: readonly Era[] = [
   {
     id: 'contabilidad',
     period: '2017',
+    startYear: 2017,
     title: 'Contabilidad',
     note: 'El punto de partida: entender cómo se construyen los números.',
     capabilities: ['Conciliaciones', 'Estados financieros', 'Impuestos', 'Reporting'],
@@ -23,6 +31,7 @@ export const eras: readonly Era[] = [
   {
     id: 'automatizacion',
     period: '2018 — 2021',
+    startYear: 2018,
     title: 'Automatización',
     note: 'Muchos problemas contables eran, en realidad, problemas de proceso.',
     capabilities: ['Excel', 'Google Sheets', 'SQL', 'Procesos financieros'],
@@ -30,6 +39,7 @@ export const eras: readonly Era[] = [
   {
     id: 'datos',
     period: '2021 — 2024',
+    startYear: 2021,
     title: 'Datos',
     note: 'De automatizar tareas a construir información para decidir.',
     capabilities: ['R', 'Business Intelligence', 'Dashboards', 'Arquitectura de información'],
@@ -37,11 +47,15 @@ export const eras: readonly Era[] = [
   {
     id: 'producto',
     period: '2025 →',
+    startYear: 2025,
     title: 'Producto',
     note: 'Diseñar soluciones completas, no funcionalidades aisladas.',
     capabilities: ['Fintech', 'APIs', 'Pagos', 'Productos B2B', 'Modelos transaccionales'],
   },
 ] as const;
+
+/** The right-hand edge of the trajectory chart. */
+export const TRAJECTORY_END_YEAR = 2026;
 
 /** Where all of it converges today. */
 export const todayLabel = {

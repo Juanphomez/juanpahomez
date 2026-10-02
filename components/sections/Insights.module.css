@@ -27,6 +27,14 @@
   gap: var(--s-2) var(--s-6);
   padding: var(--s-6) 0;
   border-bottom: 1px solid var(--rule);
+  transition:
+    background-color var(--t-base) var(--ease-out),
+    padding-left var(--t-base) var(--ease-out);
+}
+
+.item:hover {
+  background-color: var(--wash);
+  padding-left: var(--s-4);
 }
 
 .topic {

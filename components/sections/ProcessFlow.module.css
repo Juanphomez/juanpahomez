@@ -22,28 +22,30 @@
 .stateLabel {
   display: flex;
   align-items: center;
-  gap: var(--s-3);
+  gap: var(--s-4);
   margin: 0;
   color: var(--fg);
-  font-size: var(--fs-h4);
+  font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2.5rem);
   font-weight: var(--fw-medium);
-  letter-spacing: var(--ls-tight);
+  letter-spacing: var(--ls-tighter);
+  line-height: 1.1;
 }
 
 .stateNote {
   margin: 0;
-  max-width: 44ch;
+  max-width: 46ch;
   color: var(--fg-muted);
-  font-size: var(--fs-small);
+  font-size: var(--fs-body-lg);
   line-height: 1.55;
 }
 
 .dot {
   flex: none;
-  width: 6px;
-  height: 6px;
+  width: 12px;
+  height: 12px;
   border-radius: var(--r-pill);
-  background-color: var(--fg-faint);
+  /* Warm for the state we are leaving, blue for the one we are building */
+  background-color: var(--amber-ink);
 }
 
 .dotAfter {
@@ -55,7 +57,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--s-3) var(--s-2);
+  gap: var(--s-4) var(--s-3);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -70,35 +72,53 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 0.4375rem 0.8125rem;
+  padding: var(--s-3) var(--s-5);
   border: 1px solid var(--rule-strong);
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   background-color: var(--paper-raised);
   color: var(--fg-body);
-  font-size: var(--fs-micro);
+  font-size: var(--fs-body);
   line-height: 1.3;
   white-space: nowrap;
+  transition:
+    transform var(--t-base) var(--ease-out),
+    box-shadow var(--t-base) var(--ease-out);
 }
 
 /* Manual steps look provisional: dashed edge, no fill, slightly off-baseline */
 .before .chip {
   border-style: dashed;
+  border-color: var(--line-strong);
   background-color: transparent;
   color: var(--fg-muted);
 }
 
 .after .chip {
+  position: relative;
   border-color: transparent;
   background-color: var(--paper-raised);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-blue);
   color: var(--fg);
   font-weight: var(--fw-medium);
+  padding-left: var(--s-6);
+}
+
+/* A blue edge marks the steps that became part of a system */
+.after .chip::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: var(--r-md) 0 0 var(--r-md);
+  background-color: var(--accent-ink);
 }
 
 .connector {
   flex: none;
-  width: var(--s-6);
-  height: 1px;
+  width: var(--s-8);
+  height: 2px;
   background-color: var(--rule-strong);
 }
 
@@ -117,30 +137,31 @@
 .loop {
   display: inline-flex;
   align-items: center;
-  gap: var(--s-2);
-  margin-top: var(--s-4);
-  color: var(--fg-faint);
-  font-size: var(--fs-eyebrow);
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+  color: var(--amber-ink);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-medium);
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
 }
 
 .loopLine {
   display: block;
-  width: clamp(3rem, 14vw, 9rem);
-  height: 1px;
-  background-image: linear-gradient(to right, var(--line-strong) 50%, transparent 0);
-  background-size: 5px 1px;
+  width: clamp(4rem, 16vw, 11rem);
+  height: 2px;
+  background-image: linear-gradient(to right, var(--amber-ink) 50%, transparent 0);
+  background-size: 7px 2px;
   background-repeat: repeat-x;
 }
 
 .outcome {
   display: inline-flex;
   align-items: center;
-  gap: var(--s-2);
-  margin-top: var(--s-4);
+  gap: var(--s-3);
+  margin-top: var(--s-6);
   color: var(--accent-ink);
-  font-size: var(--fs-eyebrow);
+  font-size: var(--fs-micro);
   font-weight: var(--fw-medium);
   letter-spacing: var(--ls-eyebrow);
   text-transform: uppercase;
@@ -148,9 +169,9 @@
 
 .outcomeLine {
   display: block;
-  width: clamp(3rem, 14vw, 9rem);
-  height: 1px;
-  background-color: var(--accent);
+  width: clamp(4rem, 16vw, 11rem);
+  height: 2px;
+  background-color: var(--accent-ink);
 }
 
 /* --- Static layout: both states shown, side by side --------------------- */
@@ -178,13 +199,13 @@
 .animatedTrack {
   /* Scroll distance that drives the transition. Long enough for the change to
      read as deliberate, short enough that it never feels like the page stopped. */
-  height: 165vh;
+  height: 185vh;
 }
 
 .sticky {
   position: sticky;
   /* Centred in the viewport while pinned, never tucked under the header */
-  top: max(calc(var(--header-h) + 2rem), calc(50vh - 11rem));
+  top: max(calc(var(--header-h) + 2rem), calc(50vh - 13rem));
   display: grid;
   gap: var(--s-10);
   /* Reserve the taller of the two states so nothing jumps during the morph */
@@ -195,7 +216,7 @@
 .layers {
   position: relative;
   /* Reserves the taller of the two states so the stage never jumps */
-  min-height: 14rem;
+  min-height: 15.5rem;
 }
 
 .layer {
@@ -235,7 +256,8 @@
 /* Progress rule under the stage: the only chrome the animation needs */
 .progress {
   position: relative;
-  height: 1px;
+  height: 2px;
+  border-radius: var(--r-pill);
   background-color: var(--rule);
 }
 
@@ -243,7 +265,8 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: calc(var(--p) * 100%);
-  background-color: var(--accent);
+  /* Warm at the start, blue at the end — the section's whole argument */
+  background-image: linear-gradient(to right, var(--amber-ink), var(--accent-ink));
 }
 
 @media (prefers-reduced-motion: reduce) {

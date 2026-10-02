@@ -6,8 +6,6 @@ type EyebrowProps = {
   children: ReactNode;
   /** Leading hairline. Decorative. */
   ruled?: boolean;
-  /** Renders in the accent colour, for sections that need the emphasis. */
-  marked?: boolean;
   as?: 'p' | 'span' | 'div';
   className?: string;
 };
@@ -16,13 +14,12 @@ type EyebrowProps = {
 export function Eyebrow({
   children,
   ruled = true,
-  marked = false,
   as: Tag = 'p',
   className,
 }: EyebrowProps) {
   return (
     <Tag
-      className={cn(styles.eyebrow, ruled && styles.ruled, marked && styles.marked, className)}
+      className={cn(styles.eyebrow, ruled && styles.ruled, className)}
     >
       <span>{children}</span>
     </Tag>

@@ -146,7 +146,7 @@
 }
 
 .figureValue {
-  color: var(--fg);
+  color: var(--mark);
   font-size: clamp(2.25rem, 1.5rem + 3.4vw, 3.75rem);
   font-weight: var(--fw-medium);
   font-variant-numeric: tabular-nums;
